@@ -97,7 +97,12 @@ public class GoogleAdMobAdapter extends BaseAdapter implements AdListener {
         // Uncomment the line above to enable test ads on the emulator.
         
         Location location = mMoPubView.getLocation();
-        if (location != null) request.setLocation(location);
+        try {
+            if (location != null) request.setLocation(location);
+        } catch (NoSuchMethodError e) {
+          // ignore
+        }
+        
         
         mAdMobView.loadAd(request);
     }
