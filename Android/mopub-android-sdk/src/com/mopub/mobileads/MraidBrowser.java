@@ -19,7 +19,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.mopub.mobileads.R;
+import com.mopub.mobileads.MoPub;
 
 public class MraidBrowser extends Activity {
     
@@ -32,7 +32,7 @@ public class MraidBrowser extends Activity {
         getWindow().requestFeature(Window.FEATURE_PROGRESS);
         getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_ON);
         
-        setContentView(R.layout.mraid_browser);
+        setContentView(MoPub.getResourseIdByName(getPackageName(),"layout","mraid_browser"));
         
         Intent intent = getIntent();
         initializeWebView(intent);
@@ -41,7 +41,7 @@ public class MraidBrowser extends Activity {
     }
     
     private void initializeWebView(Intent intent) {
-        WebView webView = (WebView) findViewById(R.id.webView);
+        WebView webView = (WebView) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","webView"));
         WebSettings webSettings = webView.getSettings();
         
         webSettings.setJavaScriptEnabled(true);
@@ -93,22 +93,22 @@ public class MraidBrowser extends Activity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                ImageButton forwardButton = (ImageButton) findViewById(R.id.browserForwardButton);
-                forwardButton.setImageResource(R.drawable.unrightarrow);
+                ImageButton forwardButton = (ImageButton) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","browserForwardButton"));
+                forwardButton.setImageResource(MoPub.getResourseIdByName(getPackageName(),"drawable","unrightarrow"));
             }
-            
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
 
-                ImageButton backButton = (ImageButton) findViewById(R.id.browserBackButton);
-                int backImageResource = (view.canGoBack()) ? 
-                        R.drawable.leftarrow : R.drawable.unleftarrow;
+                ImageButton backButton = (ImageButton) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","browserBackButton"));
+                int backImageResource = (view.canGoBack()) ?
+                        MoPub.getResourseIdByName(getPackageName(),"drawable","leftarrow") : MoPub.getResourseIdByName(getPackageName(),"drawable","unleftarrow");
                 backButton.setImageResource(backImageResource);
 
-                ImageButton forwardButton = (ImageButton) findViewById(R.id.browserForwardButton);
-                int fwdImageResource = (view.canGoForward()) ? 
-                        R.drawable.rightarrow : R.drawable.unrightarrow;
+                ImageButton forwardButton = (ImageButton) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","browserForwardButton"));
+                int fwdImageResource = (view.canGoForward()) ?
+                        MoPub.getResourseIdByName(getPackageName(),"drawable","rightarrow") : MoPub.getResourseIdByName(getPackageName(),"drawable","unrightarrow");
                 forwardButton.setImageResource(fwdImageResource);
             }
         });
@@ -124,34 +124,34 @@ public class MraidBrowser extends Activity {
     }
     
     private void initializeButtons(Intent intent) {
-        ImageButton backButton = (ImageButton) findViewById(R.id.browserBackButton);
+        ImageButton backButton = (ImageButton) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","browserBackButton"));
         backButton.setBackgroundColor(Color.TRANSPARENT);
         backButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                WebView webView = (WebView) findViewById(R.id.webView);
+                WebView webView = (WebView) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","webView"));
                 if (webView.canGoBack()) webView.goBack();
             }
         });
         
-        ImageButton forwardButton = (ImageButton) findViewById(R.id.browserForwardButton);
+        ImageButton forwardButton = (ImageButton) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","browserForwardButton"));
         forwardButton.setBackgroundColor(Color.TRANSPARENT);
         forwardButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                WebView webView = (WebView) findViewById(R.id.webView);
+                WebView webView = (WebView) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","webView"));
                 if (webView.canGoForward()) webView.goForward();
             }
         });
         
-        ImageButton refreshButton = (ImageButton) findViewById(R.id.browserRefreshButton);
+        ImageButton refreshButton = (ImageButton) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","browserRefreshButton"));
         refreshButton.setBackgroundColor(Color.TRANSPARENT);
         refreshButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                WebView webView = (WebView) findViewById(R.id.webView);
+                WebView webView = (WebView) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","webView"));
                 webView.reload();
             }
         });
         
-        ImageButton closeButton = (ImageButton) findViewById(R.id.browserCloseButton);
+        ImageButton closeButton = (ImageButton) findViewById(MoPub.getResourseIdByName(getPackageName(),"id","browserCloseButton"));
         closeButton.setBackgroundColor(Color.TRANSPARENT);
         closeButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {

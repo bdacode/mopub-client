@@ -40,9 +40,9 @@ public abstract class BaseActivity extends Activity {
         if (mCloseButton == null) {
             StateListDrawable states = new StateListDrawable();
             states.addState(new int[] {-android.R.attr.state_pressed},
-                    getResources().getDrawable(R.drawable.close_button_normal));
+                    getResources().getDrawable(MoPub.getResourseIdByName(getPackageName(),"drawable","close_button_normal")));
             states.addState(new int[] {android.R.attr.state_pressed},
-                    getResources().getDrawable(R.drawable.close_button_pressed));
+                    getResources().getDrawable(MoPub.getResourseIdByName(getPackageName(),"drawable","close_button_pressed")));
             mCloseButton = new ImageButton(this);
             mCloseButton.setImageDrawable(states);
             mCloseButton.setBackgroundDrawable(null);

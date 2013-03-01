@@ -2,11 +2,11 @@ package com.mopub.mobileads;
 
 import java.util.ArrayList;
 
-import com.mopub.mobileads.R;
 import com.mopub.mobileads.MraidView.ExpansionStyle;
 import com.mopub.mobileads.MraidView.NativeCloseButtonStyle;
 import com.mopub.mobileads.MraidView.PlacementType;
 import com.mopub.mobileads.MraidView.ViewState;
+import com.mopub.mobileads.MoPub;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -222,9 +222,9 @@ class MraidDisplayController extends MraidAbstractController {
     
     private void resetViewToDefaultState() {        
         FrameLayout adContainerLayout = 
-            (FrameLayout) mRootView.findViewById(R.id.ad_container_layout_id);
+            (FrameLayout) mRootView.findViewById(MoPub.getResourseIdByName(getView().getContext().getPackageName(),"id","ad_container_layout_id"));
         RelativeLayout expansionLayout = (RelativeLayout) mRootView.findViewById(
-                R.id.modal_container_layout_id);
+                MoPub.getResourseIdByName(getView().getContext().getPackageName(),"id","modal_container_layout_id"));
         
         setNativeCloseButtonEnabled(false);
         adContainerLayout.removeAllViewsInLayout();
@@ -250,7 +250,7 @@ class MraidDisplayController extends MraidAbstractController {
         // Obtain the root content view, since that's where we're going to insert the expanded 
         // content. We must do this before swapping the MraidView with its place-holder;
         // otherwise, getRootView() will return the wrong view (or null).
-        mRootView = (FrameLayout) getView().getRootView().findViewById(android.R.id.content);
+        mRootView = (FrameLayout) getView().getRootView().findViewById(MoPub.getResourseIdByName(getView().getContext().getPackageName(),"id","content"));
 
         useCustomClose(shouldUseCustomClose);
         setOrientationLockEnabled(shouldLockOrientation);
@@ -310,7 +310,7 @@ class MraidDisplayController extends MraidAbstractController {
         if (expandHeight < closeButtonSize) expandHeight = closeButtonSize;
 
         RelativeLayout expansionLayout = new RelativeLayout(getView().getContext());
-        expansionLayout.setId(R.id.modal_container_layout_id);
+        expansionLayout.setId(MoPub.getResourseIdByName(getView().getContext().getPackageName(),"id","modal_container_layout_id"));
         
         View dimmingView = new View(getView().getContext());
         dimmingView.setBackgroundColor(Color.TRANSPARENT);
@@ -324,7 +324,7 @@ class MraidDisplayController extends MraidAbstractController {
                 RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT));
         
         FrameLayout adContainerLayout = new FrameLayout(getView().getContext());
-        adContainerLayout.setId(R.id.ad_container_layout_id);
+        adContainerLayout.setId(MoPub.getResourseIdByName(getView().getContext().getPackageName(),"id","ad_container_layout_id"));
         
         adContainerLayout.addView(expansionContentView, new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT));
@@ -354,15 +354,15 @@ class MraidDisplayController extends MraidAbstractController {
         if (mRootView == null) return;
         
         FrameLayout adContainerLayout = 
-            (FrameLayout) mRootView.findViewById(R.id.ad_container_layout_id);
+            (FrameLayout) mRootView.findViewById(MoPub.getResourseIdByName(getView().getContext().getPackageName(),"id","ad_container_layout_id"));
         
         if (enabled) {
             if (mCloseButton == null) {
                 StateListDrawable states = new StateListDrawable();
                 states.addState(new int[] {-android.R.attr.state_pressed},
-                        getView().getResources().getDrawable(R.drawable.close_button_normal));
+                        getView().getResources().getDrawable(MoPub.getResourseIdByName(getView().getContext().getPackageName(),"drawable","close_button_normal")));
                 states.addState(new int[] {android.R.attr.state_pressed},
-                        getView().getResources().getDrawable(R.drawable.close_button_pressed));
+                        getView().getResources().getDrawable(MoPub.getResourseIdByName(getView().getContext().getPackageName(),"drawable","close_button_pressed")));
                 mCloseButton = new ImageButton(getView().getContext());
                 mCloseButton.setImageDrawable(states);
                 mCloseButton.setBackgroundDrawable(null);

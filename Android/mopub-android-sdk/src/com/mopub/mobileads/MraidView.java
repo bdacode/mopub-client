@@ -1,5 +1,7 @@
 package com.mopub.mobileads;
 
+import com.mopub.mobileads.MoPub;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -138,7 +140,7 @@ public class MraidView extends WebView {
         }
         
         // Inject the MRAID JavaScript bridge.
-        String mraid = "file://" + copyRawResourceToFilesDir(R.raw.mraid, "mraid.js");
+        String mraid = "file://" + copyRawResourceToFilesDir(MoPub.getResourseIdByName(getContext().getPackageName(),"raw","mraid"), "mraid.js");
         data = data.replace("<head>", "<head><script src='" + mraid + "'></script>");
         
         loadDataWithBaseURL(null, data, "text/html", "UTF-8", null);
